@@ -1,0 +1,27 @@
+<?php
+/**
+ * Copyright © 2021 magerubik.com. All rights reserved.
+ * @author Magerubik Team <info@magerubik.com>
+ * @package Magerubik_Blog
+ * @var $block \Magerubik\Blog\Block\Post\View
+ */
+?>
+<?php
+    $_post = $this->getPost();
+    $_postUrl = $_post->getPostUrl();
+    $_postNameStripped = $block->stripTags($_post->getTitle(), null, true);
+	$_postName = $block->escapeHtml($_post->getTitle(), null, true);
+?>
+<div class="hkk-title-mainbaner">
+	<div class="post-image rel-img">
+		<img class="object-fit" src="<?php echo $_post->getDetailimageSrc() ?>"/>
+	</div>
+	<div class="abs-content">
+		<div class="hkk-content a-center">
+			<div class="blog-capption mid-capption">
+				<?= $this->getChildHtml('page.main.title') ?>
+				<?= $this->getChildHtml('breadcrumbs') ?>		
+			</div>
+		</div>
+    </div>
+</div>

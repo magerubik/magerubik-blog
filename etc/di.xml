@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 magerubik.com. All rights reserved.
+ * @author Magerubik Team <info@magerubik.com>
+ * @package Magerubik_Blog
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magerubik\Blog\Api\PostRepositoryInterface" type="Magerubik\Blog\Model\Repository\PostRepository" />
+	<preference for="Magerubik\Blog\Api\Data\PostInterface" type="Magerubik\Blog\Model\Post" />
+	<preference for="Magerubik\Blog\Api\CategoryRepositoryInterface" type="Magerubik\Blog\Model\Repository\CategoryRepository" />
+	<preference for="Magerubik\Blog\Api\Data\CategoryInterface" type="Magerubik\Blog\Model\Category" />
+	<type name="Magento\Sitemap\Model\Sitemap">
+        <plugin name="magerubik_blog_sitemap" type="Magerubik\Blog\Model\SitemapPlagin" />
+    </type>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="mrblog_post_listing_data_source" xsi:type="string">Magerubik\Blog\Model\ResourceModel\Post\Collection\Grid</item>
+				<item name="mrblog_category_listing_data_source" xsi:type="string">Magerubik\Blog\Model\ResourceModel\Category\Collection\Grid</item>
+				<item name="category_post_listing_data_source" xsi:type="string">Magerubik\Blog\Model\ResourceModel\Post\Collection\Grid</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

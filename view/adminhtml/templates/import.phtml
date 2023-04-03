@@ -1,0 +1,22 @@
+<?php
+/**
+ * Copyright © 2021 magerubik.com. All rights reserved.
+ * @author Magerubik Team <info@magerubik.com>
+ * @package Magerubik_Blog
+ * @var $block \Magento\Backend\Block\Template
+ */
+?>
+
+<table class="available-imports">
+	<tr>
+		<td>
+			<div class="itm-hld" onclick="window.location='<?php echo $block->getUrl('blog/import/wordpress') ?>'">
+				<img src="<?php echo $this->getViewFileUrl('Magerubik_Blog::images/wordpress.png') ?>" />
+				<span class="lable">Import from WordPress (beta)</span>
+			</div>
+		</td>
+		<td></td>
+		<td></td>
+		<td></td>
+	<tr>
+</table>

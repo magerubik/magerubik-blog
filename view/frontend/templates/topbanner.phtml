@@ -1,0 +1,26 @@
+<?php 
+/**
+ * Copyright © 2021 magerubik.com. All rights reserved.
+ * @author Magerubik Team <info@magerubik.com>
+ * @package Magerubik_Blog
+ */
+	$blogHelp = $this->helper('Magerubik\Blog\Helper\Data'); 
+	$img = $blogHelp->getConfig('mrblog/index_page/top_banner');
+	$url = $this->helper('Magento\Cms\Helper\Wysiwyg\Images')->getBaseUrl();
+	if(!$img){
+		$img = 'default_banner.jpg';
+	}
+?>
+<div class="hkk-title-mainbaner">
+	<div class="post-image rel-img">
+		<img class="object-fit" src="<?php echo $url . 'magerubik/blog/'. $img; ?>"/>
+	</div>
+	<div class="abs-content">
+		<div class="hkk-content a-center">
+			<div class="blog-capption mid-capption">
+				<?= $this->getChildHtml('page.main.title') ?>
+				<?= $this->getChildHtml('breadcrumbs') ?>		
+			</div>
+		</div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 magerubik.com. All rights reserved.
+ * @author Magerubik Team <info@magerubik.com>
+ * @package Magerubik_Blog
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-right" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+		<css src="Magerubik_All::css/bootstrap-grid.min.css"/>
+    </head>
+	<body>
+    	<attribute name="class" value="has-banner"/>
+		<referenceContainer name="page.top">
+			<block class="Magento\Framework\View\Element\Template" name="blog.custom.top" template="Magerubik_Blog::topbanner.phtml" after="navigation.sections"/>
+		</referenceContainer>
+		<referenceContainer name="sidebar.additional">
+            <block class="Magerubik\Blog\Block\Sidebar" name="blog.sidebar" template="sidebar.phtml">
+                <block class="Magerubik\Blog\Block\Sidebar\Search" name="blog.sidebar.search" template="sidebar/search.phtml" />
+                <block class="Magerubik\Blog\Block\Sidebar\Categories" name="blog.sidebar.category" template="sidebar/categories.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                </block>
+                <block class="Magerubik\Blog\Block\Sidebar\Recent" name="blog.sidebar.recent" template="sidebar/recent.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                </block>
+                <block class="Magerubik\Blog\Block\Sidebar\Archive" name="blog.sidebar.archive" template="sidebar/archive.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                </block>
+            </block>
+            <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+            <referenceBlock name="wishlist_sidebar" remove="true"/>
+		</referenceContainer>
+		<move element="page.main.title" destination="blog.custom.top" before="-"/> 
+		<move element="breadcrumbs" destination="blog.custom.top"/>
+    </body>
+</page>

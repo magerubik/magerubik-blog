@@ -1,0 +1,13 @@
+<?php
+/**
+ * Copyright © 2021 magerubik.com. All rights reserved.
+ * @author Magerubik Team <info@magerubik.com>
+ * @package Magerubik_Blog
+ * @var $block \Magerubik\Blog\Block\Post\PostList\Toolbar
+ */
+?>
+<?php if ($block->getCollection()->getSize()): ?>
+    <div class="toolbar toolbar-blog-posts post-paginav">
+        <?php echo $block->getPagerHtml() ?>
+    </div>
+<?php endif ?>

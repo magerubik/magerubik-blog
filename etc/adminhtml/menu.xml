@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 magerubik.com. All rights reserved.
+ * @author Magerubik Team <info@magerubik.com>
+ * @package Magerubik_Blog
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+		<update id="Magerubik_All::menu" title="Magerubik" module="Magerubik_Blog" sortOrder="15" resource="Magerubik_All::menu"/>
+		<add id="Magerubik_Blog::elements" title="Blogs" module="Magerubik_Blog" sortOrder="60" parent="Magerubik_All::menu" resource="Magerubik_Blog::elements"/>
+		<add id="Magerubik_Blog::post" title="Posts" module="Magerubik_Blog" parent="Magerubik_Blog::elements" sortOrder="10" action="blog/post/" resource="Magerubik_Blog::post"/>
+		<add id="Magerubik_Blog::category" title="Categories" module="Magerubik_Blog" parent="Magerubik_Blog::elements" sortOrder="20" action="blog/category/" resource="Magerubik_Blog::category"/>
+		<add id="Magerubik_Blog::config_blog" title="Blogs setting" module="Magerubik_Blog" sortOrder="30" parent="Magerubik_Blog::elements" resource="Magerubik_Blog::config_blog" action="adminhtml/system_config/edit/section/mrblog" />
+    </menu>
+</config>

@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="magerubik_blog_post" resource="default" engine="innodb" comment="Magerubik Blog Post Table">
+        <column xsi:type="int" name="post_id" padding="5" unsigned="true" nullable="false" identity="true" comment="Post ID"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Post Title"/>
+        <column xsi:type="varchar" name="detailimage" nullable="false" length="255" comment="Detailimage Image"/>
+        <column xsi:type="varchar" name="thumbnailimage" nullable="false" length="255" comment="Thumbnail Image"/>
+        <column xsi:type="text" name="meta_keywords" nullable="true" comment="Post Meta Keywords"/>
+        <column xsi:type="text" name="meta_description" nullable="true" comment="Post Meta Description"/>
+        <column xsi:type="varchar" name="identifier" nullable="true" length="100" comment="Post String Identifier"/>
+        <column xsi:type="varchar" name="content_heading" nullable="true" length="255" comment="Post Content Heading"/>
+        <column xsi:type="text" name="short_content" nullable="true" comment="Short Content"/>
+        <column xsi:type="mediumtext" name="content" nullable="true" comment="Post Content"/>
+		<column xsi:type="smallint" name="is_active" padding="5" nullable="false" default="1" comment="Is Post Active"/>
+        <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Post Creation Time"/>
+        <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Post Modification Time"/>
+        <column xsi:type="timestamp" name="publish_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Post Publish Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id"/>
+        </constraint>
+		<index referenceId="MAGERUBIK_BLOG_POST_TITLE" indexType="btree">
+            <column name="title"/>
+        </index>
+		<index referenceId="MAGERUBIK_BLOG_POST_META_KEYWORDS" indexType="btree">
+            <column name="meta_keywords"/>
+        </index>
+		<index referenceId="MAGERUBIK_BLOG_POST_META_DESCRIPTION" indexType="btree">
+            <column name="meta_description"/>
+        </index>
+		<index referenceId="MAGERUBIK_BLOG_POST_IDENTIFIER" indexType="btree">
+            <column name="identifier"/>
+        </index>
+		<index referenceId="MAGERUBIK_BLOG_POST_CONTENT" indexType="btree">
+            <column name="content"/>
+        </index>
+    </table>
+	<table name="magerubik_blog_post_store" resource="default" engine="innodb" comment="Magerubik Blog Post To Store Linkage Table">
+        <column xsi:type="int" name="post_id" padding="5" unsigned="true" nullable="false" comment="Post ID"/>
+		<column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id"/>
+            <column name="store_id"/>
+        </constraint>
+		<index referenceId="MAGERUBIK_BLOG_POST_STORE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+		<constraint xsi:type="foreign" referenceId="MGR_BLO_POS_STO_POS_ID_POS_ID"
+            table="magerubik_blog_post_store" column="post_id"
+            referenceTable="magerubik_blog_post" referenceColumn="post_id" onDelete="CASCADE"/>
+		<constraint xsi:type="foreign" referenceId="MGR_BLO_POS_STO_STO_ID_STO_ID"
+            table="magerubik_blog_post_store" column="store_id"
+            referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+    </table>
+	<table name="magerubik_blog_category" resource="default" engine="innodb" comment="Magerubik Blog Category Table">
+        <column xsi:type="int" name="category_id" padding="5" unsigned="true" nullable="false" identity="true" comment="Category ID"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Category Title"/>
+        <column xsi:type="varchar" name="thumbnailimage" nullable="false" length="255" comment="Thumbnail Image"/>
+        <column xsi:type="text" name="meta_title" nullable="true" comment="Category Meta Title"/>
+        <column xsi:type="text" name="meta_keywords" nullable="true" comment="Category Meta Keywords"/>
+        <column xsi:type="text" name="meta_description" nullable="true" comment="Category Meta Description"/>
+        <column xsi:type="varchar" name="identifier" nullable="true" length="100" comment="Category String Identifier"/>
+        <column xsi:type="varchar" name="content_heading" nullable="true" length="255" comment="Category Content Heading"/>
+        <column xsi:type="mediumtext" name="content" nullable="true" comment="Category Content"/>
+        <column xsi:type="int" name="parent_id" nullable="false" default="1" comment="Category Parent Id"/>
+        <column xsi:type="varchar" name="path" nullable="true" length="255" comment="Category Path"/>
+		<column xsi:type="smallint" name="position" padding="5" nullable="false" default="0" comment="Category Position"/>
+		<column xsi:type="smallint" name="is_active" padding="5" nullable="false" default="1" comment="Is Category Active"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="category_id"/>
+        </constraint>
+		<index referenceId="MAGERUBIK_BLOG_CATEGORY_TITLE" indexType="btree">
+            <column name="title"/>
+        </index>
+		<index referenceId="MAGERUBIK_BLOG_CATEGORY_META_KEYWORDS" indexType="btree">
+            <column name="meta_keywords"/>
+        </index>
+		<index referenceId="MAGERUBIK_BLOG_CATEGORY_META_DESCIPTION" indexType="btree">
+            <column name="meta_description"/>
+        </index>
+		<index referenceId="MAGERUBIK_BLOG_CATEGORY_IDENTIFIER" indexType="btree">
+            <column name="identifier"/>
+        </index>
+		<index referenceId="MAGERUBIK_BLOG_CATEGORY_CONTENT" indexType="btree">
+            <column name="content"/>
+        </index>
+    </table>
+	<table name="magerubik_blog_category_store" resource="default" engine="innodb" comment="Magerubik Blog Category To Store Linkage Table">
+        <column xsi:type="int" name="category_id" unsigned="true" padding="5" nullable="false" comment="Category ID"/>
+		<column xsi:type="smallint" name="store_id" unsigned="true" padding="5" nullable="false" comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="category_id"/>
+            <column name="store_id"/>
+        </constraint>
+		<index referenceId="MAGERUBIK_BLOG_CATEGORY_STORE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+		<constraint xsi:type="foreign" referenceId="MGR_BLO_CAT_STO_CAT_ID_CAT_ID"
+            table="magerubik_blog_category_store" column="category_id"
+            referenceTable="magerubik_blog_category" referenceColumn="category_id" onDelete="CASCADE"/>
+		<constraint xsi:type="foreign" referenceId="MGR_BLO_CAT_STO_STO_ID_STO_ID"
+            table="magerubik_blog_category_store" column="store_id"
+            referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+    </table>
+	<table name="magerubik_blog_post_category" resource="default" engine="innodb" comment="Magerubik Blog Category To Store Linkage Table">
+        <column xsi:type="int" name="post_id" unsigned="true" padding="5" nullable="false" comment="Post ID"/>
+        <column xsi:type="int" name="category_id" unsigned="true" padding="5" nullable="false" comment="Category ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id"/>
+            <column name="category_id"/>
+        </constraint>
+		<index referenceId="MAGERUBIK_BLOG_POST_CATEGORY_CATEGORY_ID" indexType="btree">
+            <column name="category_id"/>
+        </index>
+		<constraint xsi:type="foreign" referenceId="MGR_BLO_POS_CAT_POS_ID_POS_ID"
+            table="magerubik_blog_post_category" column="post_id"
+            referenceTable="magerubik_blog_post" referenceColumn="post_id" onDelete="CASCADE"/>
+		<constraint xsi:type="foreign" referenceId="MGR_BLO_POS_CAT_STO_ID_STO_ID"
+            table="magerubik_blog_post_category" column="category_id"
+            referenceTable="magerubik_blog_category" referenceColumn="category_id" onDelete="CASCADE"/>
+    </table>
+	<table name="magerubik_blog_post_relatedproduct" resource="default" engine="innodb" comment="Magerubik Blog Post To Product Linkage Table">
+        <column xsi:type="int" name="post_id" unsigned="true" padding="5" nullable="false" comment="Post ID"/>
+        <column xsi:type="int" name="related_id" unsigned="true" padding="5" nullable="false" comment="Related Product ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id"/>
+            <column name="related_id"/>
+        </constraint>
+		<index referenceId="MAGERUBIK_BLOG_POST_RELATEDPRODUCT_RELATED_ID" indexType="btree">
+            <column name="related_id"/>
+        </index>
+		<constraint xsi:type="foreign" referenceId="MGR_BLO_POS_RPR_POS_ID_POS_ID"
+            table="magerubik_blog_post_relatedproduct" column="post_id"
+            referenceTable="magerubik_blog_post" referenceColumn="post_id" onDelete="CASCADE"/>
+		<constraint xsi:type="foreign" referenceId="MGR_BLO_POS_RPR_REL_ID_ENT_ID"
+            table="magerubik_blog_post_relatedproduct" column="related_id"
+            referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+	<table name="magerubik_blog_post_relatedpost" resource="default" engine="innodb" comment="Magerubik Blog Post To Post Linkage Table">
+        <column xsi:type="int" name="post_id" unsigned="true" padding="5" nullable="false" comment="Post ID"/>
+        <column xsi:type="int" name="related_id" unsigned="true" padding="5" nullable="false" comment="Related Post ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id"/>
+            <column name="related_id"/>
+        </constraint>
+		<index referenceId="MAGERUBIK_BLOG_POST_RELATEDPOST_RELATED_ID" indexType="btree">
+            <column name="related_id"/>
+        </index>
+		<constraint xsi:type="foreign" referenceId="MGR_BLO_POS_RPO_POS_ID_POS_ID1"
+            table="magerubik_blog_post_relatedpost" column="post_id"
+            referenceTable="magerubik_blog_post" referenceColumn="post_id" onDelete="CASCADE"/>
+		<constraint xsi:type="foreign" referenceId="MGR_BLO_POS_RPO_POS_ID_POS_ID2"
+            table="magerubik_blog_post_relatedpost" column="post_id"
+            referenceTable="magerubik_blog_post" referenceColumn="post_id" onDelete="CASCADE"/>
+    </table>
+</schema>

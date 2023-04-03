@@ -1,0 +1,46 @@
+<?php
+/**
+ * Copyright © 2021 magerubik.com. All rights reserved.
+ * @author Magerubik Team <info@magerubik.com>
+ * @package Magerubik_Blog
+ * @var $block \Magerubik\Blog\Block\Sidebar\Categories
+ */
+?>
+<?php $items = $this->getGroupedChilds(); ?>
+<?php if (count($items)) { ?>
+<div class="sidebar-post">
+	<div class="widget widget-post-cat" data-bind="scope: 'categories'">
+		<div class="block-title">
+			<strong><?php echo __('Categories') ?></strong>
+		</div>
+		<ul class="nav-list">
+		<?php
+			$level = 0;
+			$first = true;
+			foreach($items as $item) {
+				$newLevel = $item->getLevel();
+				if ($level == $newLevel && !$first) {
+					echo '</li>';
+				}
+				if ($level < $newLevel) {
+					echo '<ul>';
+				}
+				if ($level > $newLevel) {
+					for ($i = $level; $i > $newLevel; $i--){
+						echo '</ul></li>';
+					}
+				}
+				?>
+					<li>
+						<a href="<?php echo $item->getCategoryUrl() ?>">
+							<?php echo $block->escapeHtml($item->getTitle()) ?>
+						</a>
+				<?php
+				$level = $newLevel;
+				$first = false;
+			}
+		?>
+		</ul>
+	</div>
+</div>
+<?php } ?>

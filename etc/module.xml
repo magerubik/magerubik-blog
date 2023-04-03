@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 magerubik.com. All rights reserved.
+ * @author Magerubik Team <info@magerubik.com>
+ * @package Magerubik_Blog
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Magerubik_Blog" setup_version="2.0.1">
+         <sequence>
+         	<module name="Magento_Cms"/>
+         	<module name="Magento_Catalog"/>
+			<module name="Magerubik_All"/>
+        </sequence>
+    </module>
+</config>

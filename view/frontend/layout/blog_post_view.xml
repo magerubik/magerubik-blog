@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 magerubik.com. All rights reserved.
+ * @author Magerubik Team <info@magerubik.com>
+ * @package Magerubik_Blog
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="blog_default"/>
+    <update handle="blog_post_list"/>
+	<body>
+		<attribute name="class" value="has-banner"/>
+		<referenceContainer name="page.top">
+			<block class="Magerubik\Blog\Block\Post\View" name="blog.custom.top" template="post/details_image.phtml" after="navigation.sections"></block>
+		</referenceContainer>
+		<referenceBlock name="page.main.title" remove="false"/>
+		<referenceContainer name="content">
+			<container name="content.container.wrapper" htmlTag="div">
+				<block class="Magerubik\Blog\Block\Post\View" name="blog.post" template="post/view.phtml">
+					<block class="Magerubik\Blog\Block\Post\Info" name="blog.post.info" template="post/info.phtml" />
+					<action method="setPostInfoBlockName">
+						<argument name="name" xsi:type="string">blog.post.info</argument>
+					</action>
+					<block class="Magento\Framework\View\Element\Text\ListText" name="blog.post.bottom">
+						<block class="Magerubik\Blog\Block\Post\View\RelatedPosts" name="blog.post.relatedposts" as="relatedposts"  template="Magerubik_Blog::post/view/relatedposts.phtml" />
+						<block class="Magerubik\Blog\Block\Post\View\Comments" name="blog.post.comments" template="post/view/comments.phtml" />
+						<block class="Magerubik\Blog\Block\Post\View\RelatedProducts" name="blog.post.relatedproducts" as="relatedproducts"  template="Magerubik_Blog::post/view/relatedproducts.phtml" />
+						<block class="Magento\Framework\View\Element\Template" name="blog.post.js" as="js"  template="Magerubik_Blog::post/view/js.phtml" />
+					</block>			 
+				</block> 
+			</container>	
+        </referenceContainer>
+    </body>
+</page>

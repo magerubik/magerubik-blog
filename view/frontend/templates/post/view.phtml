@@ -1,0 +1,30 @@
+<?php
+/**
+ * Copyright © 2021 magerubik.com. All rights reserved.
+ * @author Magerubik Team <info@magerubik.com>
+ * @package Magerubik_Blog
+ * @var $block \Magerubik\Blog\Block\Post\View
+ */
+?>
+<?php
+    $_post = $this->getPost();
+    $_postUrl = $_post->getPostUrl();
+    $_postNameStripped = $block->stripTags($_post->getTitle(), null, true);
+?>
+<div class="post-view">
+    <div class="post-holder post-holder-<?php echo $_post->getId() ?>">
+        <div class="post-tags-info">
+            <?php echo $this->getInfoHtml() ?>
+        </div>
+        <div class="post-date space-b3"><strong><?php echo date('d', strtotime($_post->getPublishTime())); ?>, </strong><span><?php echo date('M, Y', strtotime($_post->getPublishTime())); ?></span></div>
+		<div class="post-content">
+            <div class="post-description">
+                <?php echo $block->getContent() ?>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="post-bottom">
+            <?php echo $this->getChildHtml('blog.post.bottom') ?>
+        </div>
+    </div>
+</div>

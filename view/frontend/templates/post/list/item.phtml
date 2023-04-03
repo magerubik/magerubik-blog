@@ -1,0 +1,37 @@
+<?php
+/**
+ * Copyright © 2021 magerubik.com. All rights reserved.
+ * @author Magerubik Team <info@magerubik.com>
+ * @package Magerubik_Blog
+ * @var $block \Magerubik\Blog\Block\Post\AbstractPost
+ */
+?>
+<?php
+    $_post = $this->getPost();
+    $_postUrl = $_post->getPostUrl();
+    $_postName = $block->escapeHtml($_post->getTitle(), null, true);
+?>
+<div class="row item-post-full post-holder-<?php echo $_post->getId() ?>">
+	<div class="col-12 col-md-6 blog-post-thumb">
+		<div class="zoom-image-thumb">
+			<a href="<?php echo $_post->getPostUrl() ?>">
+				<img alt="<?php echo $_postName; ?>" src="<?php echo $_post->getThumbnailimageSrc() ?>"/>
+			</a>
+		</div>		
+	</div>
+	<div class="col-12 col-md-6 blog-post-info">
+		<div class="post-tags-info">
+			<?php echo $this->getInfoHtml() ?>
+		</div>
+		<div class="post-info-extra space-b2">
+			<div class="post-date"><i class="hkkr hkk-calendar-alt"></i> <strong><?php echo date('d', strtotime($_post->getPublishTime())); ?>, </strong><span><?php echo date('M, Y', strtotime($_post->getPublishTime())); ?></span></div>
+		</div>
+		<h3 class="post-title"><a title="<?php echo $_postUrl ?>" href="<?php echo $_postUrl ?>"> <?php echo $_postName; ?></a></h3>
+		<div class="hkk-desc">
+			<?php echo $_post->getShortContent() ?>
+		</div>
+		<div class="space-t2">
+			<a href="<?php echo $_post->getPostUrl() ?>" class="post-readmore"><?php echo __('Read More');?></a>
+		</div>
+	</div>
+</div>
