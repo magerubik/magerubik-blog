@@ -8,12 +8,14 @@
 	$img = $blogHelp->getConfig('mrblog/index_page/top_banner');
 	$url = $this->helper('Magento\Cms\Helper\Wysiwyg\Images')->getBaseUrl();
 	if(!$img){
-		$img = 'default_banner.jpg';
+		$imgSrc = $block->getViewFileUrl('/Magerubik_blog/images') . '/default_banner.jpg';
+	} else {
+		$imgSrc = $url . 'magerubik/blog/'. $img;
 	}
 ?>
 <div class="hkk-title-mainbaner">
 	<div class="post-image rel-img">
-		<img class="object-fit" src="<?php echo $url . 'magerubik/blog/'. $img; ?>"/>
+		<img class="object-fit" src="<?php echo $imgSrc; ?>"/>
 	</div>
 	<div class="abs-content">
 		<div class="hkk-content a-center">
